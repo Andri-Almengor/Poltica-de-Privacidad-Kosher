@@ -98,12 +98,49 @@
       display: block;
     }
 
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
     .nav-link {
       color: var(--white);
       font-size: 16px;
       font-weight: 700;
       padding-bottom: 8px;
       border-bottom: 2px solid rgba(255,255,255,0.55);
+    }
+
+    .language-switch {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px;
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(8px);
+    }
+
+    .language-switch button {
+      border: 0;
+      cursor: pointer;
+      padding: 7px 12px;
+      border-radius: 999px;
+      color: var(--white);
+      background: transparent;
+      font-weight: 800;
+      font-size: 13px;
+      transition: 0.25s ease;
+    }
+
+    .language-switch button:hover,
+    .language-switch button.active {
+      background: var(--white);
+      color: var(--primary);
     }
 
     .hero-content {
@@ -297,14 +334,30 @@
 
       .nav {
         align-items: flex-start;
+        gap: 14px;
       }
 
       .logo {
         width: 120px;
       }
 
+      .nav-actions {
+        gap: 10px;
+      }
+
       .nav-link {
         font-size: 14px;
+        padding-bottom: 6px;
+      }
+
+      .language-switch {
+        gap: 5px;
+        padding: 3px;
+      }
+
+      .language-switch button {
+        padding: 6px 10px;
+        font-size: 12px;
       }
 
       .hero-content {
@@ -362,12 +415,26 @@
         padding-right: 16px;
       }
 
+      .nav {
+        flex-direction: column;
+        align-items: center;
+      }
+
       .logo {
-        width: 108px;
+        width: 118px;
+      }
+
+      .nav-actions {
+        width: 100%;
+        justify-content: center;
       }
 
       .nav-link {
         font-size: 13px;
+      }
+
+      .hero-content {
+        margin-top: 30px;
       }
 
       .hero-content h1 {
@@ -396,18 +463,25 @@
   <header class="hero" id="inicio">
     <nav class="nav">
       <img src="logo-kosher.svg" alt="Logo Kosher Costa Rica" class="logo" />
-      <a href="#inicio" class="nav-link">Inicio</a>
+
+      <div class="nav-actions">
+        <a href="#inicio" class="nav-link" data-i18n="navHome">Inicio</a>
+        <div class="language-switch" aria-label="Cambiar idioma">
+          <button type="button" id="btn-es" class="active" onclick="changeLanguage('es')">ES</button>
+          <button type="button" id="btn-en" onclick="changeLanguage('en')">EN</button>
+        </div>
+      </div>
     </nav>
 
     <div class="hero-content">
-      <h1>Política de Privacidad</h1>
+      <h1 data-i18n="title">Política de Privacidad</h1>
       <div class="title-line"></div>
-      <p class="updated">Última actualización: Junio de 2026</p>
+      <p class="updated" data-i18n="updated">Última actualización: Junio de 2026</p>
     </div>
   </header>
 
   <main class="main">
-    <p class="intro">
+    <p class="intro" data-i18n="intro">
       Bienvenido a Kosher Costa Rica (en adelante, "la Aplicación"). Nos tomamos muy en serio tu privacidad,
       y por eso hemos diseñado nuestra aplicación para que sea un entorno seguro. Nuestra filosofía es simple:
       tus datos son tuyos y de nadie más.
@@ -423,8 +497,8 @@
           </svg>
         </div>
         <div class="policy-content">
-          <h2>1. Recopilación de Información</h2>
-          <p>
+          <h2 data-i18n="section1Title">1. Recopilación de Información</h2>
+          <p data-i18n="section1Text">
             No recopilamos ninguna información. La Aplicación no solicita, no almacena, no procesa ni transfiere
             ningún tipo de datos personales, información de ubicación, identificadores de dispositivo, listas de
             contactos, fotos ni ningún otro dato sensible o no sensible.
@@ -442,8 +516,8 @@
           </svg>
         </div>
         <div class="policy-content">
-          <h2>2. Uso de la Información</h2>
-          <p>
+          <h2 data-i18n="section2Title">2. Uso de la Información</h2>
+          <p data-i18n="section2Text">
             Dado que no recopilamos ningún dato, no compartimos, vendemos, alquilamos ni comercializamos ninguna
             información con terceras partes, empresas de publicidad o analíticas.
           </p>
@@ -459,8 +533,8 @@
           </svg>
         </div>
         <div class="policy-content">
-          <h2>3. Almacenamiento Local</h2>
-          <p>
+          <h2 data-i18n="section3Title">3. Almacenamiento Local</h2>
+          <p data-i18n="section3Text">
             Cualquier configuración, preferencia o dato generado por el usuario dentro de la Aplicación se almacena
             exclusivamente de forma local en tu dispositivo y nunca se envía a servidores externos. Si eliminas la
             Aplicación, estos datos se borrarán de tu dispositivo de forma permanente.
@@ -476,8 +550,8 @@
           </svg>
         </div>
         <div class="policy-content">
-          <h2>4. Enlaces a Terceros</h2>
-          <p>
+          <h2 data-i18n="section4Title">4. Enlaces a Terceros</h2>
+          <p data-i18n="section4Text">
             La Aplicación puede contener enlaces a otros sitios. Si haces clic en ellos, te sugerimos revisar sus
             propias políticas de privacidad.
           </p>
@@ -496,8 +570,8 @@
           </svg>
         </div>
         <div class="policy-content">
-          <h2>5. Privacidad de los Menores</h2>
-          <p>
+          <h2 data-i18n="section5Title">5. Privacidad de los Menores</h2>
+          <p data-i18n="section5Text">
             Al no recopilar ningún tipo de información, nuestra Aplicación es completamente segura para usuarios de
             todas las edades, incluidos los menores de edad.
           </p>
@@ -514,8 +588,8 @@
           </svg>
         </div>
         <div class="policy-content">
-          <h2>6. Cambios a esta Política de Privacidad</h2>
-          <p>
+          <h2 data-i18n="section6Title">6. Cambios a esta Política de Privacidad</h2>
+          <p data-i18n="section6Text">
             Es posible que actualicemos esta Política de Privacidad de vez en cuando. Te recomendamos revisar esta
             página periódicamente para ver cualquier cambio. Cualquier modificación entrará en vigor inmediatamente
             después de su publicación en esta pantalla.
@@ -533,8 +607,8 @@
       </div>
 
       <div>
-        <h2>7. Contacto</h2>
-        <p>
+        <h2 data-i18n="contactTitle">7. Contacto</h2>
+        <p data-i18n="contactText">
           Si tienes alguna pregunta o sugerencia sobre nuestra Política de Privacidad, no dudes en ponerte en contacto
           con nosotros en:
         </p>
@@ -544,7 +618,7 @@
             <svg class="mini-icon" viewBox="0 0 24 24" fill="currentColor">
               <path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm-.4 4.25-7.07 4.42a1 1 0 0 1-1.06 0L4.4 8.25A1 1 0 1 1 5.46 6.56L12 10.65l6.54-4.09a1 1 0 1 1 1.06 1.69Z"/>
             </svg>
-            <span>Correo electrónico: <a href="mailto:appkoshercostarica@gmail.com">appkoshercostarica@gmail.com</a></span>
+            <span><span data-i18n="emailLabel">Correo electrónico:</span> <a href="mailto:appkoshercostarica@gmail.com">appkoshercostarica@gmail.com</a></span>
           </li>
 
           <li>
@@ -554,7 +628,7 @@
               <path d="M12 3a14 14 0 0 1 0 18"/>
               <path d="M12 3a14 14 0 0 0 0 18"/>
             </svg>
-            <span>Sitio web/Contacto: <a href="https://www.centroisraelita.com/contact" target="_blank" rel="noopener noreferrer">https://www.centroisraelita.com/contact</a></span>
+            <span><span data-i18n="websiteLabel">Sitio web/Contacto:</span> <a href="https://www.centroisraelita.com/contact" target="_blank" rel="noopener noreferrer">https://www.centroisraelita.com/contact</a></span>
           </li>
         </ul>
       </div>
@@ -562,7 +636,81 @@
   </main>
 
   <footer class="footer">
-    <p>© 2026 Kosher Costa Rica. Todos los derechos reservados.</p>
+    <p data-i18n="footerText">© 2026 Kosher Costa Rica. Todos los derechos reservados.</p>
   </footer>
+
+  <script>
+    const translations = {
+      es: {
+        pageTitle: "Política de Privacidad | Kosher Costa Rica",
+        navHome: "Inicio",
+        title: "Política de Privacidad",
+        updated: "Última actualización: Junio de 2026",
+        intro: "Bienvenido a Kosher Costa Rica (en adelante, \"la Aplicación\"). Nos tomamos muy en serio tu privacidad, y por eso hemos diseñado nuestra aplicación para que sea un entorno seguro. Nuestra filosofía es simple: tus datos son tuyos y de nadie más.",
+        section1Title: "1. Recopilación de Información",
+        section1Text: "No recopilamos ninguna información. La Aplicación no solicita, no almacena, no procesa ni transfiere ningún tipo de datos personales, información de ubicación, identificadores de dispositivo, listas de contactos, fotos ni ningún otro dato sensible o no sensible.",
+        section2Title: "2. Uso de la Información",
+        section2Text: "Dado que no recopilamos ningún dato, no compartimos, vendemos, alquilamos ni comercializamos ninguna información con terceras partes, empresas de publicidad o analíticas.",
+        section3Title: "3. Almacenamiento Local",
+        section3Text: "Cualquier configuración, preferencia o dato generado por el usuario dentro de la Aplicación se almacena exclusivamente de forma local en tu dispositivo y nunca se envía a servidores externos. Si eliminas la Aplicación, estos datos se borrarán de tu dispositivo de forma permanente.",
+        section4Title: "4. Enlaces a Terceros",
+        section4Text: "La Aplicación puede contener enlaces a otros sitios. Si haces clic en ellos, te sugerimos revisar sus propias políticas de privacidad.",
+        section5Title: "5. Privacidad de los Menores",
+        section5Text: "Al no recopilar ningún tipo de información, nuestra Aplicación es completamente segura para usuarios de todas las edades, incluidos los menores de edad.",
+        section6Title: "6. Cambios a esta Política de Privacidad",
+        section6Text: "Es posible que actualicemos esta Política de Privacidad de vez en cuando. Te recomendamos revisar esta página periódicamente para ver cualquier cambio. Cualquier modificación entrará en vigor inmediatamente después de su publicación en esta pantalla.",
+        contactTitle: "7. Contacto",
+        contactText: "Si tienes alguna pregunta o sugerencia sobre nuestra Política de Privacidad, no dudes en ponerte en contacto con nosotros en:",
+        emailLabel: "Correo electrónico:",
+        websiteLabel: "Sitio web/Contacto:",
+        footerText: "© 2026 Kosher Costa Rica. Todos los derechos reservados."
+      },
+      en: {
+        pageTitle: "Privacy Policy | Kosher Costa Rica",
+        navHome: "Home",
+        title: "Privacy Policy",
+        updated: "Last updated: June 2026",
+        intro: "Welcome to Kosher Costa Rica (hereinafter, \"the App\"). We take your privacy very seriously, and that is why we have designed our application to be a safe environment. Our philosophy is simple: your data belongs to you and no one else.",
+        section1Title: "1. Information Collection",
+        section1Text: "We do not collect any information. The App does not request, store, process, or transfer any personal data, location information, device identifiers, contact lists, photos, or any other sensitive or non-sensitive data.",
+        section2Title: "2. Use of Information",
+        section2Text: "Since we do not collect any data, we do not share, sell, rent, or trade any information with third parties, advertising companies, or analytics firms.",
+        section3Title: "3. Local Storage",
+        section3Text: "Any settings, preferences, or user-generated data within the App are stored exclusively locally on your device and are never sent to external servers. If you delete the App, this data will be permanently erased from your device.",
+        section4Title: "4. Third-Party Links",
+        section4Text: "The App may contain links to other websites. If you click on them, we suggest that you review their respective privacy policies.",
+        section5Title: "5. Children's Privacy",
+        section5Text: "Since we do not collect any type of information, our App is completely safe for users of all ages, including minors.",
+        section6Title: "6. Changes to this Privacy Policy",
+        section6Text: "We may update this Privacy Policy from time to time. We recommend that you review this page periodically for any changes. Any modification will take effect immediately after it is published on this screen.",
+        contactTitle: "7. Contact",
+        contactText: "If you have any questions or suggestions about our Privacy Policy, please feel free to contact us at:",
+        emailLabel: "Email:",
+        websiteLabel: "Website/Contact:",
+        footerText: "© 2026 Kosher Costa Rica. All rights reserved."
+      }
+    };
+
+    function changeLanguage(lang) {
+      const selected = translations[lang] || translations.es;
+
+      document.documentElement.lang = lang;
+      document.title = selected.pageTitle;
+
+      document.querySelectorAll("[data-i18n]").forEach((element) => {
+        const key = element.getAttribute("data-i18n");
+        if (selected[key]) {
+          element.textContent = selected[key];
+        }
+      });
+
+      document.getElementById("btn-es").classList.toggle("active", lang === "es");
+      document.getElementById("btn-en").classList.toggle("active", lang === "en");
+      localStorage.setItem("kosherPrivacyLanguage", lang);
+    }
+
+    const savedLanguage = localStorage.getItem("kosherPrivacyLanguage") || "es";
+    changeLanguage(savedLanguage);
+  </script>
 </body>
 </html>
